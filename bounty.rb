@@ -5,6 +5,7 @@ require 'RMagick'
 require 'serel'
 
 def generate(site)
+  $stderr.puts "generate called with \"#{site}\""
   Serel::Base.config(site, 'y6kJ2wLn7yuN7ilUOvBRPw((')
 
   bounties = Serel::Question.featured.request
@@ -12,9 +13,11 @@ def generate(site)
   rep = 0
   i = 0
 
-  bounties.each do |t|
-  	rep += t.bounty_amount
-  	i += 1
+  if bounties
+    bounties.each do |t|
+    	rep += t.bounty_amount
+    	i += 1
+    end
   end
 
   bg = Magick::ImageList.new('./bottom.png')
