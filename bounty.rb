@@ -5,7 +5,6 @@ require 'RMagick'
 require 'serel'
 
 def generate(site)
-  $stderr.puts "generate called with \"#{site}\""
   Serel::Base.config(site, 'y6kJ2wLn7yuN7ilUOvBRPw((')
 
   bounties = Serel::Question.featured.request
