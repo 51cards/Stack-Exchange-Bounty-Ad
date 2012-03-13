@@ -1,0 +1,20 @@
+first digit:
+	left:  41
+	top:   63
+	size:  89
+	color: #2f2f2f
+	font:  Helvetica Regular
+
+second digit:
+	left:  134
+	top:   63
+	size:  89
+	color: #2f2f2f
+	font:  Helvetica Regular
+
+value:
+	left:  104
+	top:   212
+	size:  21
+	color: #3b3b3b
+	font:  Anonymous Pro Bold
