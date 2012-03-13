@@ -51,6 +51,4 @@ values.annotate(bg, 40, 40, 104, 212, rep.to_s) do
 	self.gravity = gravity
 end
 
-fg.composite!(bg, 35, 105, Magick::OverCompositeOp)
-
-bg.write('./final.png')
+bg.composite_layers(fg).write('./final.png')
