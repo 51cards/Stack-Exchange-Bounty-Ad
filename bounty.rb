@@ -19,12 +19,12 @@ def generate(site)
     end
   end
 
-  bg = Magick::ImageList.new('./bottom.png')
-  fg = Magick::ImageList.new('./top.png')
+  bg = Magick::ImageList.new('./resources/bottom.png')
+  fg = Magick::ImageList.new('./resources/top.png')
   values = Magick::Draw.new
   gravity = Magick::NorthWestGravity
-  bountyCountFont = "Helvetica.ttf"
-  repFont = "Anonymous Pro B.ttf"
+  bountyCountFont = './resources/Helvetica.ttf'
+  repFont = './resources/Anonymous Pro B.ttf'
 
   firstDigit, secondDigit = ('%02d' % i).split(//)
 
@@ -55,4 +55,8 @@ def generate(site)
   end
 
   bg.composite_layers(fg).write("./cache/#{site}.png")
+end
+
+if __FILE__ == $0 and ARGV.length > 0
+    generate(ARGV[0])
 end
