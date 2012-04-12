@@ -56,3 +56,7 @@ def generate(site)
 
   bg.composite_layers(fg).write("./cache/#{site}.png")
 end
+
+if __FILE__ == $0 and ARGV.length > 0
+    generate(ARGV[0])
+end
