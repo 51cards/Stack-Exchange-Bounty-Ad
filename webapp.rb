@@ -5,7 +5,7 @@ require './bounty.rb'
 get '/bounty.png' do
   if /http:\/\/(?:meta\.)?(?<domain>[\w\.]+)/ =~ request.referrer
     if not File.exists?("./cache/#{domain}.png")
-      #generate(domain)
+      generate(domain)
       status 404
       "404: does not exist in cache"
     end
