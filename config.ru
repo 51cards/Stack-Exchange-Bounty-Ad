@@ -1,3 +1,3 @@
-require "webapp"
+require "./webapp.rb"
 
 run Sinatra::Application
