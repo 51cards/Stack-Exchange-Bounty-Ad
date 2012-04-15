@@ -2,7 +2,7 @@ require 'sinatra'
 require './bounty.rb'
 
 # time to hold cached images in seconds
-$cache_hold_time = 0
+$cache_hold_time = 3600
 
 get '/bounty.png' do
   if /http:\/\/(?:meta\.)?(?<domain>[\w\.]+)/ =~ request.referrer
