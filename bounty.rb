@@ -19,6 +19,11 @@ def generate(site)
     end
   end
 
+  filename = "#{site}-#{rep}-#{i}.png"
+  if File.exists?(filename)
+    exit
+  end
+
   bg = Magick::ImageList.new('./resources/bottom.png')
   fg = Magick::ImageList.new('./resources/top.png')
   values = Magick::Draw.new
@@ -54,7 +59,7 @@ def generate(site)
   	self.gravity = gravity
   end
 
-  bg.composite_layers(fg).write("./cache/#{site}.png")
+  bg.composite_layers(fg).write("./cache/#{filename}")
 end
 
 if __FILE__ == $0 and ARGV.length > 0
