@@ -17,14 +17,6 @@ get '/bounty.png' do
   end
 end
 
-get '/bountytest' do
-  if /http:\/\/(?:meta\.)?(?<domain>[\w\.]+)/ =~ request.referrer
-    domain
-  else
-    status 404
-    "404: unable to parse referrer"
-  end
-end
 
 get // do
   status 404
