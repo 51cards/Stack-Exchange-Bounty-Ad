@@ -20,7 +20,7 @@ def generate(site)
   end
 
   filename = "#{site}-#{rep}-#{i}.png"
-  if File.exists?(filename)
+  if File.exists?("./cache/#{filename}")
     exit
   end
 
