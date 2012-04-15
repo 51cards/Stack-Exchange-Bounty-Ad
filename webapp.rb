@@ -9,8 +9,6 @@ get '/bounty.png' do
     if not File.exists?("./cache/#{domain}.png") or
       (Time.now - File.mtime("./cache/#{domain}.png")) >= $cache_hold_time
       generate(domain)
-      status 404
-      "404: does not exist in cache"
     end
     send_file "./cache/#{domain}.png"
   else
@@ -18,6 +16,7 @@ get '/bounty.png' do
     "404: unable to parse referrer"
   end
 end
+
 
 get // do
   status 404
