@@ -2,7 +2,7 @@ require 'sinatra'
 require './bounty.rb'
 
 # time to hold cached images in seconds
-$cache_hold_time = 3600
+$cache_hold_time = 0
 
 get '/bounty.png' do
   if /http:\/\/(?:meta\.)?(?<domain>[\w\.]+)/ =~ request.referrer
@@ -11,6 +11,15 @@ get '/bounty.png' do
       generate(domain)
     end
     send_file "./cache/#{domain}.png"
+  else
+    status 404
+    "404: unable to parse referrer"
+  end
+end
+
+get '/bountytest' do
+  if /http:\/\/(?:meta\.)?(?<domain>[\w\.]+)/ =~ request.referrer
+    domain
   else
     status 404
     "404: unable to parse referrer"
