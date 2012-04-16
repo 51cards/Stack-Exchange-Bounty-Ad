@@ -1,3 +1,5 @@
 final.png
 cache/*
 notes.txt
+*~
+.DS_Store
