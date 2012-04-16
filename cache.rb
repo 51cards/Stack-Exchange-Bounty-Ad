@@ -22,5 +22,9 @@ class Cache
     
     @data[key].value
   end
+  
+  def flush()
+    @data = {}
+  end
 end
 

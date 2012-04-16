@@ -27,6 +27,16 @@ get '/bounty.png' do
   end
 end
 
+get '/flushcache/info' do
+  bounty_info_cache.flush
+  "bounty info cache flushed"
+end
+
+get '/flushcache/image' do
+  bounty_image_cache.flush
+  "bounty image cache flushed"
+end
+
 
 
 
