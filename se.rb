@@ -14,14 +14,12 @@ class Site
   def bounties()
     Serel::Base.config(@domain, @se.apikey)
     bounties = Serel::Question.featured.request
-    
-    if not bounties
-      return [@domain, 0, 0]
-    end
-    
+        
     number = bounties.length
     rep    = bounties.
       map { |bounty, total| bounty.bounty_amount }.reduce(:+)
+      
+    rep = 0 if number == 0
       
     [@domain, number, rep]
   end
@@ -64,7 +62,5 @@ class SE
       select { |site| site.site_type == 'main_site' }.
       map    { |site| site.site_url }.
       map    { |url|  extract_domain(url) }
-      
-      
   end
 end
