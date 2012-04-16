@@ -1,10 +1,9 @@
 require 'serel'
 require './bounty.rb'
-require 'pp'
+
 
 class SiteDoesNotExistError < StandardError
 end
-
 
 class Site
   def initialize(domain, se)
@@ -16,7 +15,7 @@ class Site
     Serel::Base.config(@domain, @se.apikey)
     bounties = Serel::Question.featured.request
     
-    [@domain, 0, 0] if not bounties
+    return [@domain, 0, 0] if not bounties
     
     number = bounties.length
     rep    = bounties.
