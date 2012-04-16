@@ -4,7 +4,9 @@ require 'rubygems'
 require 'RMagick'
 #require 'serel'
 
-def create_image(filename, bounties, reputation)  
+
+
+def bounty_image(path, bounties, reputation)  
   rep = reputation
   i = bounties
 
@@ -43,5 +45,5 @@ def create_image(filename, bounties, reputation)
   	self.gravity = gravity
   end
 
-  bg.composite_layers(fg).write(filename)
+  bg.composite_layers(fg).write(path)
 end

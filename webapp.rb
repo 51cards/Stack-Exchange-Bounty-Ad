@@ -1,23 +1,32 @@
 require 'sinatra'
 require './se.rb'
+require './bounty.rb'
+require './cache.rb'
 
-# time to hold cached images in seconds
-$cache_hold_time = 3600
+se = SE.new('y6kJ2wLn7yuN7ilUOvBRPw((')
+
+bounty_image_cache = Cache.new(86400) do |domain, bounties, reputation|
+  path = "./cache/#{domain}.png"
+  bounty_image(path, bounties, reputation)
+  path
+end
+
+bounty_info_cache = Cache.new(3600) do |referrer|
+  bounty_image_cache[se.site(referrer).bounties]
+end
 
 
 
 get '/bounty.png' do
-  if /http:\/\/(?:meta\.)?(?<domain>[\w\.]+)/ =~ request.referrer
-    if not File.exists?("./cache/#{domain}.png") or
-      (Time.now - File.mtime("./cache/#{domain}.png")) >= $cache_hold_time
-      generate(domain)
-    end
-    send_file "./cache/#{domain}.png"
-  else
+  begin
+    send_file bounty_info_cache[request.referrer]
+  rescue SiteDoesNotExistError
     status 404
     send_file "./resources/invalid-referrer.png"
   end
 end
+
+
 
 
 get // do
