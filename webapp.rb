@@ -19,6 +19,7 @@ end
 
 get '/bounty.png' do
   begin
+    expires 0
     send_file bounty_info_cache[request.referrer]
   rescue SiteDoesNotExistError
     status 404

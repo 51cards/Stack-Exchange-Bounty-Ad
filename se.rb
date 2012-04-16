@@ -15,7 +15,9 @@ class Site
     Serel::Base.config(@domain, @se.apikey)
     bounties = Serel::Question.featured.request
     
-    return [@domain, 0, 0] if not bounties
+    if not bounties
+      return [@domain, 0, 0]
+    end
     
     number = bounties.length
     rep    = bounties.
