@@ -3,6 +3,7 @@
 require 'rubygems'
 require 'RMagick'
 
+
 def bounty_image(path, bounties, reputation)  
   bg = Magick::ImageList.new('./resources/bottom.png')
   fg = Magick::ImageList.new('./resources/top.png')
