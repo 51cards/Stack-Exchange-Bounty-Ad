@@ -5,6 +5,10 @@ class CacheItem
     @time = Time.now()
     @value = value
   end
+  
+  def to_s()
+    "[#@time #@value]"
+  end
 end
   
 
@@ -25,6 +29,14 @@ class Cache
   
   def flush()
     @data = {}
+  end
+  
+  def to_s()
+    ret = "===<br/>"
+    @data.each do |item|
+      ret += "#{item.to_s}<br/>"
+    end
+    ret + "==="
   end
 end
 

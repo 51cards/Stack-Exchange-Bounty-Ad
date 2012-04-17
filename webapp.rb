@@ -27,17 +27,16 @@ get '/bounty.png' do
   end
 end
 
-get '/flushcache/info' do
-  bounty_info_cache.flush
-  "bounty info cache flushed"
+get '/cache/:action/:which' do
+  c = {'info' => bounty_info_cache, 'image' => bounty_image_cache}[params[:which]]
+  case params[:action]
+  when 'display'
+    c.to_s
+  when 'flush'
+    c.flush
+    "#{:name} cache flushed"
+  end
 end
-
-get '/flushcache/image' do
-  bounty_image_cache.flush
-  "bounty image cache flushed"
-end
-
-
 
 
 get // do
