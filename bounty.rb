@@ -3,8 +3,20 @@
 require 'rubygems'
 require 'RMagick'
 
+class Image
+  attr_reader :blob
+  
+  def initialize(blob)
+    @blob = blob
+  end
+  
+  def to_s()
+    "Image (#{@blob.length} bytes)"
+  end
+end
 
-def bounty_image(path, bounties, reputation)  
+
+def bounty_image(domain, bounties, reputation)  
   bg = Magick::ImageList.new('./resources/bottom.png')
   fg = Magick::ImageList.new('./resources/top.png')
   values = Magick::Draw.new
@@ -12,7 +24,8 @@ def bounty_image(path, bounties, reputation)
   bountyCountFont = './resources/Helvetica.ttf'
   repFont = './resources/Anonymous Pro B.ttf'
 
-  # Doing the lower value first, otherwise the kerning value in the bounty count screws up the bounty value
+  # Doing the lower value first, otherwise the kerning value in the bounty
+  # count screws up the bounty value
   values.annotate(bg, 40, 40, 104, 212, reputation.to_s) do
     self.pointsize = 21
     self.font = repFont
@@ -31,5 +44,5 @@ def bounty_image(path, bounties, reputation)
     self.kerning = 41
   end
 
-  bg.composite_layers(fg).write(path)
+  Image.new(bg.composite_layers(fg).to_blob)
 end

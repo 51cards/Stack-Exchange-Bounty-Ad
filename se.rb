@@ -1,5 +1,5 @@
 require 'serel'
-require './bounty.rb'
+require './bounty'
 
 
 class SiteDoesNotExistError < StandardError
@@ -11,13 +11,26 @@ class Site
     @se = se
   end
   
+  def ==(other)
+    other == @domain
+  end
+  
+  alias :eql? :==
+  
+  def hash()
+    @domain.hash
+  end
+  
+  def to_s()
+    @domain
+  end
+  
   def bounties()
     Serel::Base.config(@domain, @se.apikey)
     bounties = Serel::Question.featured.request
         
     number = bounties.length
-    rep    = bounties.
-      map { |bounty, total| bounty.bounty_amount }.reduce(:+)
+    rep    = bounties.map { |bounty| bounty.bounty_amount }.reduce(:+)
       
     rep = 0 if number == 0
       

@@ -6,13 +6,11 @@ require './cache.rb'
 se = SE.new('y6kJ2wLn7yuN7ilUOvBRPw((')
 
 bounty_image_cache = Cache.new(86400) do |domain, bounties, reputation|
-  path = "./cache/#{domain}.png"
-  bounty_image(path, bounties, reputation)
-  path
+  bounty_image(domain, bounties, reputation)
 end
 
-bounty_info_cache = Cache.new(3600) do |referrer|
-  bounty_image_cache[se.site(referrer).bounties]
+bounty_info_cache = Cache.new(3600) do |site|
+  bounty_image_cache[site.bounties]
 end
 
 
@@ -20,7 +18,8 @@ end
 get '/bounty.png' do
   expires 0, :no_cache, :no_store, :must_revalidate
   begin
-    send_file bounty_info_cache[request.referrer]
+    content_type 'image/png'
+    bounty_info_cache[se.site(request.referrer)].blob
   rescue SiteDoesNotExistError
     status 404
     send_file "./resources/invalid-referrer.png"
@@ -36,6 +35,10 @@ get '/cache/:action/:which' do
     c.flush
     "#{:name} cache flushed"
   end
+end
+
+get '/info' do
+  se.info
 end
 
 
