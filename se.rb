@@ -11,11 +11,10 @@ class Site
     @se = se
   end
   
+  # http://kylecronin.me/blog/2012/4/22/a-clever-ruby-equality-trick.html
   def ==(other)
     other == @domain
   end
-  
-  alias :eql? :==
   
   def hash()
     @domain.hash
