@@ -26,7 +26,7 @@ class Site
   
   def bounties()
     Serel::Base.config(@domain, @se.apikey)
-    bounties = Serel::Question.featured.request
+    bounties = Serel::Question.featured.pagesize(99).request
         
     number = bounties.length
     rep    = bounties.map { |bounty| bounty.bounty_amount }.reduce(:+)
