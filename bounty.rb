@@ -34,14 +34,14 @@ def bounty_image(domain, bounties, reputation)
     self.gravity = gravity
   end
 
-  values.annotate(bg, 40, 40, 41, 70, ('%02d' % bounties.to_s)) do
+  values.annotate(bg, 40, 40, 40, 70, ('%02d' % bounties.to_s)) do
     self.pointsize = 89
     self.font = bountyCountFont
     self.font_family = 'Helvetica'
     self.stroke = 'transparent'
     self.fill = '#2F2F2F'
     self.gravity = gravity
-    self.kerning = 41
+    self.kerning = 44
   end
 
   Image.new(bg.composite_layers(fg).to_blob)
