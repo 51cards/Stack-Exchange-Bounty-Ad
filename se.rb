@@ -1,5 +1,5 @@
 require 'serel'
-require './bounty'
+#require './bounty'
 
 
 class SiteDoesNotExistError < StandardError
@@ -48,7 +48,7 @@ class SE
   end
   
   def site(url)
-    Site.new(validate(url), self)
+    @se_sites[validate(url)]
   end
   
   def validate(url)
@@ -70,9 +70,11 @@ class SE
   
   def update_sites()
     Serel::Base.config('', @apikey)
-    @se_sites = Serel::Site.all.
-      select { |site| site.site_type == 'main_site' }.
-      map    { |site| site.site_url }.
-      map    { |url|  extract_domain(url) }
+    @se_sites = Hash[Serel::Site.all.
+      select { |site|   site.site_type == 'main_site' }.
+      map    { |site|   site.site_url }.
+      map    { |url|    extract_domain(url) }.
+      map    { |domain| [domain, Site.new(domain, self)] }
+    ]
   end
 end

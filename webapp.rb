@@ -5,11 +5,11 @@ require './cache.rb'
 
 se = SE.new('y6kJ2wLn7yuN7ilUOvBRPw((')
 
-bounty_image_cache = Cache.new(86400) do |domain, bounties, reputation|
+bounty_image_cache = Cache.new(60*60*24) do |domain, bounties, reputation|
   bounty_image(domain, bounties, reputation)
 end
 
-bounty_info_cache = Cache.new(3600) do |site|
+bounty_info_cache = Cache.new(60*5) do |site|
   bounty_image_cache[site.bounties]
 end
 
