@@ -63,7 +63,7 @@ class SE
   end
   
   def extract_domain(url)
-    m = /^http:\/\/([\w\.]*)/.match(url)
+    m = /^(?:http:\/\/)?([\w\.]*)/.match(url)
     raise SiteDoesNotExistError if not m
     m[1]
   end

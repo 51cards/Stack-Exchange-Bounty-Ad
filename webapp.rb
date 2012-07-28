@@ -19,7 +19,8 @@ get '/bounty.png' do
   expires 0, :no_cache, :no_store, :must_revalidate
   begin
     content_type 'image/png'
-    bounty_info_cache[se.site(request.referrer)].blob
+    site = params[:site] || request.referrer
+    bounty_info_cache[se.site(site)].blob
   rescue SiteDoesNotExistError
     status 404
     send_file "./resources/invalid-referrer.png"
