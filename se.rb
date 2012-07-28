@@ -1,5 +1,5 @@
 require 'serel'
-#require './bounty'
+require './bounty'
 
 
 class SiteDoesNotExistError < StandardError
