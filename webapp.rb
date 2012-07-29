@@ -39,7 +39,7 @@ get '/cache/:action/:which' do
 end
 
 get '/info' do
-  se.info
+  se.info.to_s
 end
 
 
