@@ -27,6 +27,7 @@ class Site
   def bounties()
     Serel::Base.config(@domain, @se.apikey)
     bounties = Serel::Question.featured.pagesize(99).request
+    @se.quota_remaining = bounties.quota_remaining
         
     number = bounties.length
     rep    = bounties.map { |bounty| bounty.bounty_amount }.reduce(:+)
@@ -39,7 +40,7 @@ end
 
 
 class SE  
-  attr_accessor :apikey
+  attr_accessor :apikey, :quota_remaining
   
   def initialize(apikey)
     @apikey = apikey
@@ -70,16 +71,13 @@ class SE
   
   def update_sites()
     Serel::Base.config('', @apikey)
-    @se_sites = Hash[Serel::Site.all.
+    response = Serel::Site.all
+    @quota_remaining = response.quota_remaining
+    @se_sites = Hash[response.
       select { |site|   site.site_type == 'main_site' }.
       map    { |site|   site.site_url }.
       map    { |url|    extract_domain(url) }.
       map    { |domain| [domain, Site.new(domain, self)] }
     ]
-  end
-
-  def info()
-    Serel::Base.config('', @apikey)
-    Serel::User.get.quota_remaining
   end
 end
