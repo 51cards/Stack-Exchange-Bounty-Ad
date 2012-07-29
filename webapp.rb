@@ -39,7 +39,7 @@ get '/cache/:action/:which' do
 end
 
 get '/info' do
-  se.quota_remaining
+  se.info
 end
 
 
