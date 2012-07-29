@@ -42,7 +42,7 @@ class SE
   attr_accessor :apikey
   
   def initialize(apikey)
-    @apikey = apikey
+    Serel::Base.config('', apikey)
     @se_sites = []
     update_sites()
   end
@@ -69,12 +69,15 @@ class SE
   end
   
   def update_sites()
-    Serel::Base.config('', @apikey)
     @se_sites = Hash[Serel::Site.all.
       select { |site|   site.site_type == 'main_site' }.
       map    { |site|   site.site_url }.
       map    { |url|    extract_domain(url) }.
       map    { |domain| [domain, Site.new(domain, self)] }
     ]
+  end
+
+  def info()
+    Serel::User.get.quota_remaining
   end
 end
