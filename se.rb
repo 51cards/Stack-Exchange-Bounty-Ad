@@ -25,7 +25,6 @@ class Site
   end
   
   def bounties()
-    Serel::Base.config(@domain, @se.apikey)
     bounties = Serel::Question.featured.pagesize(99).request
         
     number = bounties.length
@@ -38,9 +37,7 @@ class Site
 end
 
 
-class SE  
-  attr_accessor :apikey
-  
+class SE    
   def initialize(apikey)
     Serel::Base.config('', apikey)
     @se_sites = []
