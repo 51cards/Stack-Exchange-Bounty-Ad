@@ -79,7 +79,7 @@ class SE
   end
 
   def info()
-    Serel::Base.config('', @apikey)
+    Serel::Base.config(:apple, @apikey)
     Serel::User.get.quota_remaining
   end
 end
