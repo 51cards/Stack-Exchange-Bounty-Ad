@@ -20,7 +20,7 @@ def bounty_image(domain, bounties, reputation)
   bg = Magick::ImageList.new('./resources/bottom.png')
   fg = Magick::ImageList.new('./resources/top.png')
   values = Magick::Draw.new
-  gravity = Magick::NorthWestGravity
+  gravity = Magick::CenterGravity
   bountyCountFont = './resources/Helvetica.ttf'
   repFont = './resources/Anonymous Pro B.ttf'
 
@@ -34,8 +34,8 @@ def bounty_image(domain, bounties, reputation)
     self.gravity = gravity
   end
 
-  values.annotate(bg, 40, 40, 40, 70, ('%02d' % bounties.to_s)) do
-    self.pointsize = 89
+  values.annotate(bg, 40, 40, 40, 66, ('%02d' % bounties.to_s)) do
+    self.pointsize = 92
     self.font = bountyCountFont
     self.font_family = 'Helvetica'
     self.stroke = 'transparent'
