@@ -12,8 +12,15 @@
 * Browse to [http://localhost:4567/bounty.png?site=apple.stackexchange.com](http://localhost:4567/bounty.png?site=apple.stackexchange.com) (or click the link if you're lazy, I know I am).
 * Success!
 
-Oh, feel free to change the site parameter to any fully qualified StackExchange domain. It should always work with any site address that would otherwise browse you to the particular site.
+Feel free to change the site parameter to any fully qualified StackExchange domain.
+
+## Test Specific Values
+
+* Run `irb`
+* `require './bounty.rb'`
+* `File.open('image.png', 'wb') { |f| f.write(bounty_image(nil, #{number_of_bounties}, #{total_rep_available}).blob) }`
 
 ## What now?
 
 I dunno. I think you're done, right?
+
