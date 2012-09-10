@@ -34,7 +34,7 @@ def bounty_image(domain, bounties, reputation)
     self.gravity = gravity
   end
 
-  values.annotate(bg, 40, 40, 90, 94, ('%02d' % bounties.to_s)) do
+  values.annotate(bg, 40, 40, 90, 99, ('%02d' % bounties.to_s)) do
     self.pointsize = 92
     self.font = bountyCountFont
     self.font_family = 'Helvetica'
