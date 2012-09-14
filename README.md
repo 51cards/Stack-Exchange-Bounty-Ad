@@ -16,8 +16,9 @@ Feel free to change the site parameter to any fully qualified StackExchange doma
 
 ## Test Specific Values
 
+Via `irb` or a script in this directory:
+
 ```ruby
-irb
 require './bounty.rb'
 File.open('image.png', 'wb') { |f| f.write(bounty_image(nil, #{number_of_bounties}, #{total_rep_available}).blob) }
 ```
