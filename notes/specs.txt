@@ -9,3 +9,6 @@ value:
 	font size: 20px
 	font color: #3b3b3b
 	top left point: 105, 220
+
+please note that the new home for this repository is:
+https://github.com/51cards/Stack-Exchange-Bounty-Ad
