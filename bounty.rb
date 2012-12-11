@@ -26,7 +26,7 @@ def bounty_image(domain, bounties, reputation)
 
   # Doing the lower value first, otherwise the kerning value in the bounty
   # count screws up the bounty value
-  values.annotate(bg, 80, 80, 204, 416, reputation.to_s) do
+  values.annotate(bg, 80, 80, 239, 416, reputation.to_s) do
     self.pointsize = 42
     self.font = repFont
     self.stroke = 'transparent'
