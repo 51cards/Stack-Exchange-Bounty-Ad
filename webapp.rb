@@ -14,6 +14,12 @@ bounty_info_cache = Cache.new(60*5) do |site|
 end
 
 
+get '/:site/bounty.png' do
+  expires 0, :no_cache, :no_store, :must_revalidate
+  content_type 'image/png'
+  site = params[:site]
+  bounty_info_cache[se.site(site)].blob
+end
 
 get '/bounty.png' do
   expires 0, :no_cache, :no_store, :must_revalidate
