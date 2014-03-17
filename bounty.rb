@@ -16,7 +16,11 @@ class Image
 end
 
 
-def bounty_image(domain, bounties, reputation)  
+def bounty_image(domain, bounties, reputation)
+  if (bounties == 0)
+    return Image.new(IO.read('./resources/no-bounties.png'))
+  end
+
   bg = Magick::ImageList.new('./resources/bottom.png')
   fg = Magick::ImageList.new('./resources/top.png')
   values = Magick::Draw.new
