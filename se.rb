@@ -57,13 +57,15 @@ class SE
       domain
     elsif @se_sites.include?(domain[5..-1])
       domain[5..-1]
+    elsif @se_sites.include?(domain[6..-1])
+      domain[6..-1]
     else
       raise SiteDoesNotExistError
     end
   end
   
   def extract_domain(url)
-    m = /^(?:http:\/\/)?([\w\.]*)/.match(url)
+    m = /^(?:https?:\/\/)?([\w\.]*)/.match(url)
     raise SiteDoesNotExistError if not m
     m[1]
   end
